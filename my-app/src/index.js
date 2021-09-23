@@ -1,4 +1,4 @@
-// 下兩個 package 類似 jquary 概念
+// 下兩個 package 類似 jquery 概念
 import React from 'react';
 // 把東西秀在畫面上
 import ReactDOM from 'react-dom';
