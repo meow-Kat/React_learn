@@ -1,5 +1,7 @@
 // 傳入 list 內容
-const Item = ({ id, note, date, time, deleteData }) =>{
+const Item = ({ id, note, date, time, deleteData , submittingStatus }) =>{
+
+    submittingStatus.current = true
 
     function deleteItem() {
         deleteData(function (prev) {

@@ -4,7 +4,7 @@ import Item from "./Item"
 // 用陣列去做很多個 item 在裡面秀
 // const arr = [ 'meow', 'cute' , 'cat']
 
-const List = ({ listData, deleteData }) =>{
+const List = ({ listData, deleteData, submittingStatus }) =>{
     console.log('listData',listData);
     return <div className="list">
         {
@@ -13,7 +13,7 @@ const List = ({ listData, deleteData }) =>{
             listData.map((item) => {
                 const { note, date, time, id } = item
                 // 左邊的 note 取值要拿的東西 右邊的 note 是上面那行的 note
-                return <Item key={id} id={id} note={note} date={date} time={time} deleteData={deleteData}/>
+                return <Item key={id} id={id} note={note} date={date} time={time} deleteData={deleteData} submittingStatus={submittingStatus}/>
             })
         }
 

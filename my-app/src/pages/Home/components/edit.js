@@ -3,7 +3,8 @@ import { useState } from "react"
 // 引入 uuid
 import { v4 } from "uuid"
 
-const Edit = ({ add }) =>{
+// 下放後也要拿出來
+const Edit = ({ add, submittingStatus }) =>{
 
     // 使用 input 做的事情
     // 初始值為空字串，透過這邊的 note 取得最後結果 新增到下面的list一樣
@@ -30,13 +31,17 @@ const Edit = ({ add }) =>{
         
 
     function addItem() {
+
+        // add 前要把 submittingStatus.current 設定 true
+        submittingStatus.current = true
+
         // index 透過 setData 傳元件，按下新增跑出
         // 這邊要使用物件的形式
         add( function (prevData) {
-            return[...prevData,{
+            return[{
                 id:v4(),
                 note, date, time
-            }]
+            },...prevData,]
         })
     }
 

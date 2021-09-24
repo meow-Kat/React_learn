@@ -1,5 +1,5 @@
-//       新增狀態   
-import { useState , useEffect} from "react"
+//       新增狀態               唯一的值
+import { useState , useEffect , useRef} from "react"
 // 把路由匯進來
 import { API_GET_DATA } from "../../global/constants"
 
@@ -42,7 +42,6 @@ const app = {
 
 // 寫一個組件，宣告一個 function
 const Home = () =>{
-    
     // let a = 100
     // 更新狀態要這樣寫
     const [a , setA] = useState(100)
@@ -56,10 +55,22 @@ const Home = () =>{
     }
     // 有 幾個項目所以畫面會秀幾個 
     const[data, setData] = useState([])
+        
+    // useRef 部分
+    // 永遠維持在最新狀態，而不影響到渲染，因為上面那行會一直變動，我們需要一個標準值
+    //                      保證永遠都是 ↓
+    const submittingStatus = useRef(false)
+    // 可4新增東西的時候要變成 true ( 要下放到新增按鈕，還有刪除按鈕 )
+
     
     // 這邊是有新增也要跟著動
     useEffect(() =>{
-        fetchSetData(data)
+        // 如果84送資料的狀態
+        if ( !submittingStatus.current ){
+            return
+        }
+        // 這邊把 data 完成的東西變成 false 新增東西變成 true
+        fetchSetData(data).then(data => submittingStatus.current = false)
     // data 變動後，把資料塞進去
     },[data])
 
@@ -83,7 +94,7 @@ const Home = () =>{
         fetchData(setData)
 
 
-    // 變成 [] 只會畫面出來時做一次
+    // 變成 [] 只會畫面出來時做一次，這邊會做完全清空，可4不能這樣所以要在上面另外用 useRef 保持資料存在
     },[])
     // ↑ 綁定上面的 data，只有 data 變了才會被執行，或改成 [data , data1] 只要這兩個其一有變化就執行
     
@@ -93,10 +104,10 @@ const Home = () =>{
         {a}<button onClick={plus}>++</button>
 
 
-        {/* prop 方式傳遞 */}
-        <Edit add={setData} />
-        {/* prop 方式傳遞 */}
-        <List listData={data} deleteData={setData}/>
+        {/* prop 方式傳遞     下放 submittingStatus 功能 */}
+        <Edit add={setData} submittingStatus = {submittingStatus}/>
+        {/* prop 方式傳遞     下放 submittingStatus 功能 */}
+        <List listData={data} deleteData={setData} submittingStatus = {submittingStatus}/>
     </div>
 }
 
