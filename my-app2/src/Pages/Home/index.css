@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  h1,h2{
+    text-align: center;
+  }
+  .container{
+    padding: 0 10vw;      
+  }
+
+  button,p{
+    cursor: pointer;
+  }
+
+  input{
+    width: 100%;
+    height: 40px;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+  .add{
+    width: 100%;
+    height: 30px;
+  }
+  span{
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    display: block;
+    margin: 10px 0;
+  }
+  .item{
+    display: flex;
+    justify-content: space-between;
+    border-bottom:2px solid black ;
+  }
+  .remove{
+    background-color: rgb(214, 63, 63);
+    color: seashell;
+    padding: 10px;
+  }
+  p{
+    letter-spacing: 2px;
+  }
